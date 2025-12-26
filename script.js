@@ -82,13 +82,27 @@ var voiture = new Voiture(canvas.width/2-w_voiture/2, canvas.height-h_voiture, w
 var touches = {}; // dico touche, utilisé plus haut, on y stocke les touches, voir plus bas pour comprendre les valeurs associés
 var car1 = new Image();
 car1.src = "medias/car1.png";
+var score = 0;
+var timer_score = 0;
+var speed = 0.2;
+var speed_kmh = 100;
+var w_obstacle = 1;
+var h_obstacle = 2;
+var timer_game = 120;
+var timer_second = 0;
 
 function loop() {
     if (!running) return; // si running == true 
     ctx.fillStyle = "rgba(0, 0, 0, 1)";
     ctx.fillRect(0, 0, canvas.width, canvas.height); // on efface le canva
+    ctx.font = "8px arial";
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillText("VOTRE SCORE " + score, 10, 23);
+    ctx.fillText("VITESSE MAX " + speed_kmh, canvas.width-80, 23);
+    ctx.fillText("TEMPS  " + timer_game, canvas.width-57, 15);
     voiture.drawcar(ctx)    // on dessine la voiture
     ctx.drawImage(car1, canvas.width/2-w_voiture/2, canvas.height-h_voiture, w_voiture,h_voiture);
+    
     // Déplacer position
     position = position + direction; // on incrémente position pour faire bouger les obstacles
     
@@ -100,8 +114,8 @@ function loop() {
     }
     
     if (time === 0) { // donc time sert à mettre un "timer" de quand les obstacles apparaissent
-        obstacles.push(new Obstacle(canvas.width/2-position, canvas.height/2-50, 1, 2, 0.2))
-        obstacles.push(new Obstacle(canvas.width/2-position+5, canvas.height/2-50, 1, 2, 0.2))
+        obstacles.push(new Obstacle(canvas.width/2-position, canvas.height/2-70, w_obstacle, h_obstacle, speed))
+        obstacles.push(new Obstacle(canvas.width/2-position+5, canvas.height/2-70, w_obstacle, h_obstacle, speed))
     }
 
     // Dessiner l'obstacle
@@ -126,8 +140,22 @@ function loop() {
    
     
     time++ // on incrément time, c'est notre timer
+    timer_score++
+    timer_second++
     if (time === 10) { // une fois à 10, on le reset et un obstacle peut apparaître
         time = 0
+    }
+    if (timer_second === 60) {
+        timer_second = 0;
+        timer_game = timer_game - 1;
+    }
+    if (timer_score === 25) {
+        timer_score = 0;
+        score++;
+        speed += 0.03;
+        speed_kmh += Math.round(Math.random() * 5);
+        w_obstacle += 0.1;
+        h_obstacle += 0.15;
     }
     rafId = requestAnimationFrame(loop); // répète la fonction
 };
@@ -157,9 +185,10 @@ function reset() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (info) info.textContent = "Reset";
 
-    obstacles = [] // on reset la liste obstacles
-    position = position_reset // et leur position
-    // note : reset la taille aussi
+    obstacles = []; // on reset la liste obstacles
+    position = position_reset; // et leur position
+    score = 0;
+    speed_kmh = 100;
 };
 
 // on récupère les boutons cliqués => actionne les fonctions concernées
