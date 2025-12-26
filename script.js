@@ -189,6 +189,10 @@ function reset() {
     position = position_reset; // et leur position
     score = 0;
     speed_kmh = 100;
+    timer_game = 120;
+    speed = 0.2;
+    w_obstacle = 1;
+    h_obstacle = 2;
 };
 
 // on récupère les boutons cliqués => actionne les fonctions concernées
