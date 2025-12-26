@@ -152,10 +152,10 @@ function loop() {
     if (timer_score === 25) {
         timer_score = 0;
         score++;
-        speed += 0.03;
+        speed += 0.015;
         speed_kmh += Math.round(Math.random() * 5);
-        w_obstacle += 0.1;
-        h_obstacle += 0.15;
+        w_obstacle += 0.025;
+        h_obstacle += 0.0325;
     }
     rafId = requestAnimationFrame(loop); // répète la fonction
 };
