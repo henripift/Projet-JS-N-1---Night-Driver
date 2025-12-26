@@ -15,10 +15,7 @@ function Voiture(x, y, w, h) { // cette fonction permettra de créer notre voitu
 
 function Collision(voiture, obstacle) { // cette fonction permet de gérer la collision
     return voiture.x < obstacle.x + obstacle.w && voiture.x + voiture.w > obstacle.x && voiture.y < obstacle.y + obstacle.h && voiture.y + voiture.h > obstacle.y   
-    //    le coté droit de la voiture touche le coté gauche de l'obstacle
-    //    inversement
-    //    le dessous de la voiture touche le haut de l'obstacle
-    //    inversement
+    
 }
 
 Obstacle.prototype.draw = function(ctx) { // fonction permettant de dessiner les obstacle / prototype signifie que c'est la fonction Obstacle (créer ci-dessous) qui héritera de la fonction draw
@@ -27,7 +24,7 @@ Obstacle.prototype.draw = function(ctx) { // fonction permettant de dessiner les
 }
 
 Voiture.prototype.drawcar = function(ctx) { // pareil mais pour la voiture
-    ctx.fillStyle = '#ffbb00ff';
+    ctx.fillStyle = '#000000';
     ctx.fillRect(this.x, this.y, this.w, this.h);
 }
 
@@ -77,18 +74,21 @@ var rafId = null; // sert à la fonction loop() et pause(), sert à savoir si la
 var obstacles = []; // liste obstacles, les objets obstacle sont stockés ici
 var time = 0; // time est utilisé plus bas
 var w_voiture = 100; // l'épaisseur de la voiture est de 100
+var h_voiture = 25; // hauteur de la voiture
 var direction = -1; // -1 pour aller vers la gauche, 1 pour aller vers la droite
 var position = Math.random() * 5; // on choisit une position au hasard
 var position_reset = position // est utilisé dans la fonction reset()
-var voiture = new Voiture(canvas.width/2-w_voiture/2, canvas.height-20, w_voiture,20); // on créé l'objet voiture
+var voiture = new Voiture(canvas.width/2-w_voiture/2, canvas.height-h_voiture, w_voiture,h_voiture); // on créé l'objet voiture
 var touches = {}; // dico touche, utilisé plus haut, on y stocke les touches, voir plus bas pour comprendre les valeurs associés
+var car1 = new Image();
+car1.src = "medias/car1.png";
 
 function loop() {
     if (!running) return; // si running == true 
     ctx.fillStyle = "rgba(0, 0, 0, 1)";
     ctx.fillRect(0, 0, canvas.width, canvas.height); // on efface le canva
     voiture.drawcar(ctx)    // on dessine la voiture
-    
+    ctx.drawImage(car1, canvas.width/2-w_voiture/2, canvas.height-h_voiture, w_voiture,h_voiture);
     // Déplacer position
     position = position + direction; // on incrémente position pour faire bouger les obstacles
     
@@ -118,6 +118,8 @@ function loop() {
             ctx.font = "48px arial";
             ctx.fillStyle = '#3bf104ff';
             ctx.fillText("Game Over", canvas.width/2-125, canvas.height/2);
+            console.log('voiture x :' + voiture.x)
+            console.log('côté de l obstacle ' + (obstacles[i].x + obstacles[i].w))
         }
     }
 
