@@ -153,14 +153,29 @@ function loop() {
             pause();
             ctx.fillStyle = '#f30f0fa1';
             ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-            ctx.font = "96px arial"; // Game Over doublé
+            ctx.font = "96px arial"; 
             ctx.fillStyle = '#3bf104ff';
             ctx.fillText("Game Over", canvasWidth/2-250, canvasHeight/2);
             console.log('voiture x :' + voiture.x)
             console.log('côté de l obstacle ' + (obstacles[i].x + obstacles[i].w))
         }
     }
-
+    if (timer_game === 115) {
+        const score_gagnant = score;
+        const vmax_gagnant = speed_kmh;
+        reset();
+        ctx.fillStyle = '#00000096';
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        ctx.font = "64px arial";
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText("BRAVO !", canvasWidth/2-120, canvasHeight/2-50);
+        ctx.font = "48px arial";
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText("Tu as gagné !", canvasWidth/2-150, canvasHeight/2+20);
+        ctx.font = "24px arial";
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText("Score : " + score_gagnant + ' | VMax : ' + vmax_gagnant, canvasWidth/2-125, canvasHeight/2+70);
+    }
    
     
     time++ // on incrément time, c'est notre timer
