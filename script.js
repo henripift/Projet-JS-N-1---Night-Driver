@@ -155,15 +155,20 @@ function loop() {
             obstacles[i].update2(ctx)
         }
         if (Collision(voiture, obstacles[i])) { // s'il il y a une collision => game over 
-            pause();
+            crashSound.play();
+            const score_gagnant = score;
+            const vmax_gagnant = speed_kmh;
+            reset();
             ctx.fillStyle = '#f30f0fa1';
             ctx.fillRect(0, 0, canvasWidth, canvasHeight);
             ctx.font = "96px arial"; 
-            ctx.fillStyle = '#3bf104ff';
+            ctx.fillStyle = '#FFFFFF';
             ctx.fillText("Game Over", canvasWidth/2-250, canvasHeight/2);
+            ctx.font = "24px arial";
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillText("Score : " + score_gagnant + ' | VMax : ' + vmax_gagnant, canvasWidth/2-125, canvasHeight/2+70);
             console.log('voiture x :' + voiture.x)
             console.log('côté de l obstacle ' + (obstacles[i].x + obstacles[i].w))
-            crashSound.play();
         }
     }
     if (timer_game === 0) {
@@ -241,6 +246,7 @@ function reset() {
     speed = 0.4;
     w_obstacle = 2;
     h_obstacle = 4;
+    engineSound.pause()
 };
 
 // on récupère les boutons cliqués => actionne les fonctions concernées
