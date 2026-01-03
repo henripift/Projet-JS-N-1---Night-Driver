@@ -166,9 +166,10 @@ function loop() {
             crashSound.play();
         }
     }
-    if (timer_game === 0) {
+    if (timer_game === 115) {
         const score_gagnant = score;
         const vmax_gagnant = speed_kmh;
+        pause();
         reset();
         ctx.fillStyle = '#00000096';
         ctx.fillRect(0, 0, canvasWidth, canvasHeight);
