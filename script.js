@@ -109,6 +109,11 @@ var h_obstacle = 4;
 var timer_game = 120;
 var timer_second = 0;
 var timer_random = 0;
+var engineSound = new Audio("medias/sound.MP3"); // Ajoute ici
+engineSound.loop = true; // Pour qu'il tourne en boucle
+engineSound.volume = 0.3; // Ajuste le volume (0.0 à 1.0)
+var crashSound = new Audio("medias/crash.MP3")
+crashSound.volume = 0.3
 
 function loop() {
     if (!running) return; // si running == true 
@@ -158,6 +163,7 @@ function loop() {
             ctx.fillText("Game Over", canvasWidth/2-250, canvasHeight/2);
             console.log('voiture x :' + voiture.x)
             console.log('côté de l obstacle ' + (obstacles[i].x + obstacles[i].w))
+            crashSound.play();
         }
     }
     if (timer_game === 0) {
@@ -203,6 +209,7 @@ function start() {
     if (running) return; // si c'est false, la fonction lance le jeu
     running = true;
     info.textContent = "En cours d'exécution...";
+    engineSound.play(); // Lance le son
     loop(); // fonction loop est lancé
 };
 
@@ -213,6 +220,7 @@ function pause() {
         rafId = null;
     }
     if (info) info.textContent = "En pause"; // petit texte en dessous le canva
+    engineSound.pause(); // Met en pause le son
 };
 
 function reset() {
