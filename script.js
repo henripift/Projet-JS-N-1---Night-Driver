@@ -166,7 +166,7 @@ function loop() {
             crashSound.play();
         }
     }
-    if (timer_game === 115) {
+    if (timer_game === 0) {
         const score_gagnant = score;
         const vmax_gagnant = speed_kmh;
         pause();
