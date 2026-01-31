@@ -1,14 +1,11 @@
 # 🚗 Night Driver - TP BTS SIO 
  
-## Group project realized at school.
+## Group Project: Night Driver Clone
  
-🎯 The **goal** of this project was to recreate the famous game **Night Driver**.
+🎯 **Goal:** The objective was to recreate the famous arcade game **"Night Driver"**.
 
-We were in group of 3, so we had to use **github** to work together.
+🛠️ **Workflow:** Working in a team of three, we used **GitHub** for **version control** and **collaboration**.
 
+💻 **Tech Stack:** The project was built entirely in **JavaScript**. As this was our **first experience** with the language, we relied heavily on technical **documentation**  master the syntax and core functions. *Note: We focused purely on the game logic using the HTML Canvas element, rather than standard HTML/CSS styling.*
 
-The langage we had to work with was **Javascript**, it was our first project with this langage, so we had to read docs to learn the syntax of the langage and the different functions. *(We didn't really work with HTML & CSS, because we already had a website with canva, we only had to do the game)*
-
-For us, the result is pretty good regarding our skills when we started the project.
-
-👍 This project was a good opportunity to discord **Javascript**.
+📈 **Outcome:** Given our skill level at the start, **we are very proud of the result**. This project was a fantastic opportunity to discover and learn JavaScript.
